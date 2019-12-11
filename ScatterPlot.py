@@ -64,6 +64,9 @@ url = "http://www.atmos.anl.gov/ANLMET/numeric/2019/nov19met.data"
 wget.download(url, 'Input\\MET TOWER\\nov19met.data')
 
 # Load this data 
+col_name = ['DOM','Month','Year','Time','PSC','WD60','WS60','WD_STD60','T60','WD10','WS10','WD_STD10','T10','DPT','RH','TD100','Precip','RS','RN','Pressure','WatVapPress','TS10','TS100','TS10F']
+metdata = pd.read_table("Input\\MET TOWER\\nov19met.data",names=col_name,header=None,delim_whitespace=True,skipfooter=1,engine='python')
+# Create a DateTime vector from metdata Month, Year and Time
 
 
 
