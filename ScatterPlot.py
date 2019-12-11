@@ -62,16 +62,25 @@ imageio.mimsave('Output\\anim.gif', images)
 import wget
 url = "http://www.atmos.anl.gov/ANLMET/numeric/2019/nov19met.data"
 wget.download(url, 'Input\\MET TOWER\\nov19met.data')
+# December not there yet
+# url = "http://www.atmos.anl.gov/ANLMET/numeric/2019/dec19met.data"
+# wget.download(url, 'Input\\MET TOWER\\dec19met.data')
 
 # Load this data 
 col_name = ['DOM','Month','Year','Time','PSC','WD60','WS60','WD_STD60','T60','WD10','WS10','WD_STD10','T10','DPT','RH','TD100','Precip','RS','RN','Pressure','WatVapPress','TS10','TS100','TS10F']
 metdata = pd.read_table("Input\\MET TOWER\\nov19met.data",names=col_name,header=None,delim_whitespace=True,skipfooter=1,engine='python')
 # Create a DateTime vector from metdata Month, Year and Time
+hr = []
+mn = []
+for t in metdata.Time.values:
+    hr.append(str(t).zfill(4)[0:2])
+    mn.append(str(t).zfill(4)[2:4])
+df = pd.DataFrame({'year': metdata.Year+2000,'month': metdata.Month,'day': metdata.DOM, 'hour': hr, 'minute': mn})
+Dtime_met = pd.to_datetime(df)
 
-
-
-
-
-
+# TO DO: integrate daily Precip
+# Timeseries, subplot (right of previous xyswccolor plot): plot of the 64 on left axis, SWCbarplot of Precip on right axis
+plt.bar(Dtime_met,metdata.Precip)
+plt.show()
 
 
