@@ -1,6 +1,6 @@
 # get all filename in Input/TEROS
 import os
-os.chdir("C:\\Users\\arenchon\\Box Sync\\Heterogeneity project\\Python\\TEROS11") # change directory if needed
+os.chdir("C:\\Users\\arenchon\\GitHub Projects\\GIF-TEROS11") # change directory if needed
 Input_FN = os.listdir("Input\\TEROS") # ! filenames are in wrong order: 1,10,11,2,3, ...
 Input_FN = [Input_FN[i] for i in [0,3,4,5,6,7,8,9,10,1,2]] # reorder correctly 
 n = len(Input_FN)
@@ -56,5 +56,19 @@ for filename in filenames:
     images.append(imageio.imread("Output\\Temp\\"+filename))
 imageio.mimsave('Output\\anim.gif', images)
 
-# TO DO: add this script to the github organisation page
 # TO DO: add a subplot on the right, which will be animation of time series on a line where x is time and y is SWC, on same timestamp, 2nd axis y rainfall as well
+
+# Download data from met tower at 484, store it in Input/MET TOWER folder
+import wget
+url = "http://www.atmos.anl.gov/ANLMET/numeric/2019/nov19met.data"
+wget.download(url, 'Input\\MET TOWER\\nov19met.data')
+
+# Load this data 
+
+
+
+
+
+
+
+
